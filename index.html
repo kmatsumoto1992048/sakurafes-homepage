@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>さくら祭り2027｜ふれあいの丘連合自治会</title>
+  <style>
+    :root {
+      --pink:   #f06292;
+      --pink-l: #fce4ec;
+      --green:  #66bb6a;
+      --yellow: #ffd54f;
+      --orange: #ff8a65;
+      --blue:   #4fc3f7;
+      --text:   #333;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      color: var(--text);
+      background: #fff9fb;
+      overflow-x: hidden;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #fce4ec 0%, #fff3e0 50%, #e8f5e9 100%);
+      text-align: center;
+      padding: 60px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸";
+      position: absolute;
+      top: 8px;
+      left: 0;
+      right: 0;
+      font-size: 22px;
+      letter-spacing: 4px;
+      opacity: 0.55;
+    }
+    .hero::after {
+      content: "🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸";
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      font-size: 22px;
+      letter-spacing: 4px;
+      opacity: 0.55;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 4px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 8vw, 4rem);
+      color: var(--pink);
+      text-shadow: 2px 2px 0 #fff, 3px 3px 0 #f8bbd0;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero .subtitle {
+      font-size: clamp(0.95rem, 3vw, 1.2rem);
+      color: #666;
+      margin-bottom: 28px;
+    }
+
+    .hero-info {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .hero-info-item {
+      background: #fff;
+      border: 2px solid var(--pink);
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--pink);
+    }
+
+    /* ===== SECTION BASE ===== */
+    section {
+      padding: 56px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: bold;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .section-title span {
+      display: inline-block;
+      padding: 0 16px;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 30%;
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    .section-title::before { left: 0; }
+    .section-title::after  { right: 0; }
+
+    /* ===== ABOUT ===== */
+    .about-bg { background: #fff; }
+
+    .about-bg .section-title { color: var(--pink); }
+    .about-bg .section-title::before,
+    .about-bg .section-title::after { background: var(--pink-l); }
+
+    .about-text {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      text-align: center;
+      color: #555;
+    }
+
+    /* ===== PROGRAM ===== */
+    .program-bg { background: #fff9fb; }
+    .program-bg .section-title { color: var(--orange); }
+    .program-bg .section-title::before,
+    .program-bg .section-title::after { background: #ffe0b2; }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .program-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s;
+      border-top: 5px solid;
+    }
+
+    .program-card:hover { transform: translateY(-4px); }
+
+    .program-card:nth-child(1) { border-color: var(--orange); }
+    .program-card:nth-child(2) { border-color: var(--pink); }
+    .program-card:nth-child(3) { border-color: var(--blue); }
+    .program-card:nth-child(4) { border-color: var(--green); }
+    .program-card:nth-child(5) { border-color: var(--yellow); }
+    .program-card:nth-child(6) { border-color: #ab47bc; }
+    .program-card:nth-child(7) { border-color: var(--orange); }
+
+    .program-card .icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .program-card h3 { font-size: 1.05rem; font-weight: bold; margin-bottom: 8px; }
+    .program-card p  { font-size: 0.88rem; color: #777; line-height: 1.6; }
+
+    /* ===== SCHEDULE ===== */
+    .schedule-bg { background: #e8f5e9; }
+    .schedule-bg .section-title { color: var(--green); }
+    .schedule-bg .section-title::before,
+    .schedule-bg .section-title::after { background: #c8e6c9; }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+
+    .schedule-table th {
+      background: var(--green);
+      color: #fff;
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .schedule-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e8f5e9;
+      font-size: 0.95rem;
+    }
+
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table tr:nth-child(even) td { background: #f9fbe7; }
+
+    /* ===== ACCESS ===== */
+    .access-bg { background: #fff; }
+    .access-bg .section-title { color: var(--blue); }
+    .access-bg .section-title::before,
+    .access-bg .section-title::after { background: #e1f5fe; }
+
+    .access-box {
+      background: #e1f5fe;
+      border-radius: 16px;
+      padding: 28px 32px;
+      font-size: 1rem;
+      line-height: 2;
+    }
+
+    .access-box strong { color: var(--blue); }
+
+    /* ===== CONTACT ===== */
+    .contact-bg { background: var(--pink-l); }
+    .contact-bg .section-title { color: var(--pink); }
+    .contact-bg .section-title::before,
+    .contact-bg .section-title::after { background: #f8bbd0; }
+
+    .contact-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(240,98,146,0.1);
+    }
+
+    .contact-box p { font-size: 1rem; line-height: 2; color: #555; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--pink);
+      color: #fff;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.9rem;
+    }
+
+    footer .footer-emoji { font-size: 1.4rem; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">ふれあいの丘連合自治会</div>
+  <h1>🌸 さくら祭り2027</h1>
+  <p class="subtitle">子どもから大人まで、みんなで楽しむ地域の春まつり</p>
+  <div class="hero-info">
+    <div class="hero-info-item">📅 2027年3月28日（日）</div>
+    <div class="hero-info-item">🕙 10:00〜15:00</div>
+    <div class="hero-info-item">📍 川和富士公園</div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<div class="about-bg">
+  <section>
+    <h2 class="section-title"><span>🌷 開催について</span></h2>
+    <p class="about-text">
+      桜咲く公園で、持込BBQ・模擬店・吹奏楽・ゲームに大抽選会まで！<br>
+      子どもから高齢者まで世代を超えてみんなで楽しめる<br>
+      地域のお祭りを今年も開催します。<br><br>
+      主催：ふれあいの丘連合自治会　連合祭実行委員会
+    </p>
+  </section>
+</div>
+
+<!-- PROGRAM -->
+<div class="program-bg">
+  <section>
+    <h2 class="section-title"><span>🎪 イベント内容</span></h2>
+    <div class="program-grid">
+
+      <div class="program-card">
+        <div class="icon">🍖</div>
+        <h3>お花見BBQエリア</h3>
+        <p>食材持参で自由参加！桜の下でみんなで焼いて食べよう。</p>
+      </div>
+
+      <div class="program-card">
+        <div class="icon">🍡</div>
+        <h3>模擬店エリア</h3>
+        <p>焼きそば・綿菓子・おもちゃ販売、つきたてお餅の実演販売も！</p>
+      </div>
+
+      <div class="program-card">
+        <div class="icon">🎺</div>
+        <h3>吹奏楽演奏</h3>
+        <p>川和中学校吹奏楽部による生演奏。心地よいBGMをお楽しみに。</p>
+      </div>
+
+      <div class="program-card">
+        <div class="icon">🪵</div>
+        <h3>モルック交流大会</h3>
+        <p>初心者・家族連れ大歓迎！みんなで気軽に楽しめるゲームです。</p>
+      </div>
+
+      <div class="program-card">
+        <div class="icon">🎯</div>
+        <h3>チェッコリ玉入れ</h3>
+        <p>子ども向けレクリエーション。参加賞・景品を多数ご用意！</p>
+      </div>
+
+      <div class="program-card">
+        <div class="icon">🪀</div>
+        <h3>けん玉検定</h3>
+        <p>腕試しに挑戦しよう。級ごとに認定します。</p>
+      </div>
+
+      <div class="program-card">
+        <div class="icon">🎟️</div>
+        <h3>大抽選会</h3>
+        <p>チラシの抽選券で参加できます。1時間おきにプチ抽選会も開催！</p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- SCHEDULE -->
+<div class="schedule-bg">
+  <section>
+    <h2 class="section-title"><span>⏰ タイムスケジュール</span></h2>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>時間</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>10:00</td><td>開会・オープニング</td></tr>
+        <tr><td>10:30</td><td>モルック交流大会 スタート</td></tr>
+        <tr><td>11:00</td><td>プチ抽選会①</td></tr>
+        <tr><td>11:30</td><td>川和中学校 吹奏楽演奏</td></tr>
+        <tr><td>12:00</td><td>チェッコリ玉入れ大会</td></tr>
+        <tr><td>13:00</td><td>プチ抽選会②</td></tr>
+        <tr><td>14:00</td><td>プチ抽選会③</td></tr>
+        <tr><td>14:30</td><td>大抽選会</td></tr>
+        <tr><td>15:00</td><td>閉会</td></tr>
+      </tbody>
+    </table>
+    <p style="text-align:center; margin-top:12px; font-size:0.85rem; color:#888;">※スケジュールは変更になる場合があります</p>
+  </section>
+</div>
+
+<!-- ACCESS -->
+<div class="access-bg">
+  <section>
+    <h2 class="section-title"><span>📍 アクセス</span></h2>
+    <div class="access-box">
+      <strong>会場：</strong>川和富士公園<br>
+      <strong>住所：</strong>神奈川県横浜市（※詳細は追って掲載予定）<br>
+      <strong>開催日：</strong>2027年3月28日（日）10:00〜15:00<br>
+      <strong>準備日：</strong>2027年3月27日（土）
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bg">
+  <section>
+    <h2 class="section-title"><span>📬 お問い合わせ</span></h2>
+    <div class="contact-box">
+      <p>
+        ふれあいの丘連合自治会　連合祭実行委員会<br>
+        📧 メールアドレス（準備中）<br>
+        ☎ 電話番号（準備中）
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-emoji">🌸</div>
+  <p>© 2027 ふれあいの丘連合自治会　連合祭実行委員会</p>
+</footer>
+
+</body>
+</html>
