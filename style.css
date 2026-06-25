@@ -10,11 +10,71 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { scroll-behavior: smooth; }
+
+/* セクションがナビに隠れないようオフセット */
+[id] { scroll-margin-top: 58px; }
+
 body {
   font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
   color: var(--text);
   background: #fff9fb;
   overflow-x: hidden;
+}
+
+/* ===== STICKY NAV ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  height: 54px;
+  background: rgba(255, 245, 248, 0.50);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(240, 98, 146, 0.12);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.site-nav.scrolled {
+  background: rgba(255, 245, 248, 0.88);
+  box-shadow: 0 2px 14px rgba(240, 98, 146, 0.10);
+}
+
+.nav-logo {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--pink);
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #666;
+  font-size: 0.88rem;
+  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  background: var(--pink-l);
+  color: var(--pink);
 }
 
 /* ===== HERO ===== */
@@ -45,6 +105,12 @@ body {
   font-size: 22px;
   letter-spacing: 4px;
   opacity: 0.55;
+}
+
+/* ===== HERO CONTENT (above petals) ===== */
+.hero-content {
+  position: relative;
+  z-index: 3;
 }
 
 .hero-badge {
@@ -83,13 +149,17 @@ body {
 }
 
 .hero-info-item {
-  background: #fff;
-  border: 2px solid var(--pink);
+  background: rgba(255, 255, 255, 0.28);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
   border-radius: 12px;
   padding: 12px 24px;
   font-size: 1.15rem;
   font-weight: bold;
   color: var(--pink);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(240, 98, 146, 0.12);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.6);
 }
 
 /* ===== SECTION BASE ===== */
@@ -273,3 +343,110 @@ footer {
 }
 
 footer .footer-emoji { font-size: 1.8rem; margin-bottom: 8px; }
+
+/* ===== SAKURA BLOOM ANIMATION ===== */
+.sakura-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── blossom container ── */
+.blossom {
+  position: absolute;
+  left: var(--x);
+  top:  var(--y);
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%) scale(var(--sz, 1));
+}
+
+/* ── bud: teardrop that fades as petals open ── */
+.bud {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 19px;
+  background: linear-gradient(168deg, #ffd6e2 0%, #ff8fab 62%, #c94068 100%);
+  border-radius: 50% 50% 42% 42% / 58% 58% 42% 42%;
+  transform: translate(-50%, -58%);
+  animation: bud-fade 0.5s ease-in forwards;
+}
+
+@keyframes bud-fade {
+  0%   { transform: translate(-50%, -58%) scale(1);    opacity: 1; }
+  100% { transform: translate(-50%, -58%) scale(0.08); opacity: 0; }
+}
+
+/* ── petal arm: one per petal, rotated around blossom centre ── */
+.petal-arm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+}
+
+/* ── petal shape: grows outward from centre ── */
+.petal-shape {
+  position: absolute;
+  width: 18px;
+  height: 26px;
+  left: -9px;
+  top: -26px;
+  background: radial-gradient(ellipse at 48% 30%,
+    #fff8fa 0%, #ffd0df 38%, #ffb3c6 68%, #ff8fab 100%);
+  border-radius: 52% 48% 48% 52% / 64% 64% 36% 36%;
+  transform-origin: 50% 100%;
+  transform: scaleX(0.05) scaleY(0);
+  animation: petal-open 0.8s ease-out forwards;
+}
+
+@keyframes petal-open {
+  0%   { transform: scaleX(0.05) scaleY(0); }
+  28%  { transform: scaleX(0.65) scaleY(0.32); }
+  62%  { transform: scaleX(1.14) scaleY(0.87); }
+  82%  { transform: scaleX(1.05) scaleY(1.04); }
+  100% { transform: scaleX(1)    scaleY(1); }
+}
+
+/* ── stamen: golden centre appears last ── */
+.stamen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  background: radial-gradient(circle at 38% 36%, #fffde7, #ffd600 52%, #ff8f00);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 2;
+  box-shadow: 0 0 6px rgba(255, 195, 0, 0.6);
+  animation: stamen-pop 0.35s ease-out forwards;
+}
+
+@keyframes stamen-pop {
+  0%   { transform: translate(-50%, -50%) scale(0); }
+  68%  { transform: translate(-50%, -50%) scale(1.28); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ===== SCROLL REVEAL ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* セクションタイトルは少し長めにゆっくり */
+h2[data-reveal] {
+  transition-duration: 0.8s;
+}

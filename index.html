@@ -8,23 +8,38 @@
 </head>
 <body>
 
+<!-- STICKY NAV -->
+<nav class="site-nav">
+  <a class="nav-logo" href="#">🌸 さくら祭り2027</a>
+  <ul class="nav-links">
+    <li><a href="#about">開催について</a></li>
+    <li><a href="#program">イベント</a></li>
+    <li><a href="#schedule">スケジュール</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="#recruit">出店・協賛</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
 <!-- HERO -->
 <header class="hero">
-  <div class="hero-badge">ふれあいの丘連合自治会</div>
-  <h1>🌸 さくら祭り2027</h1>
-  <p class="subtitle">子どもから大人まで、みんなで楽しむ地域の春まつり</p>
-  <div class="hero-info">
-    <div class="hero-info-item">📅 2027年3月28日（日）</div>
-    <div class="hero-info-item">🕙 10:00〜15:00</div>
-    <div class="hero-info-item">📍 川和富士公園</div>
+  <div class="hero-content">
+    <div class="hero-badge">ふれあいの丘連合自治会</div>
+    <h1>🌸 さくら祭り2027</h1>
+    <p class="subtitle">子どもから大人まで、みんなで楽しむ地域の春まつり</p>
+    <div class="hero-info">
+      <div class="hero-info-item">📅 2027年3月28日（日）</div>
+      <div class="hero-info-item">🕙 10:00〜15:00</div>
+      <div class="hero-info-item">📍 川和富士公園</div>
+    </div>
   </div>
 </header>
 
 <!-- ABOUT -->
-<div class="about-bg">
+<div class="about-bg" id="about">
   <section>
-    <h2 class="section-title"><span>🌷 開催について</span></h2>
-    <p class="about-text">
+    <h2 class="section-title" data-reveal><span>🌷 開催について</span></h2>
+    <p class="about-text" data-reveal>
       桜咲く公園で、持込BBQ・模擬店・吹奏楽・ゲームに大抽選会まで！<br>
       子どもから高齢者まで世代を超えてみんなで楽しめる<br>
       地域のお祭りを今年も開催します。<br><br>
@@ -34,9 +49,9 @@
 </div>
 
 <!-- PROGRAM -->
-<div class="program-bg">
+<div class="program-bg" id="program">
   <section>
-    <h2 class="section-title"><span>🎪 イベント内容</span></h2>
+    <h2 class="section-title" data-reveal><span>🎪 イベント内容</span></h2>
     <div class="program-grid">
 
       <div class="program-card">
@@ -98,10 +113,10 @@
 </div>
 
 <!-- SCHEDULE -->
-<div class="schedule-bg">
+<div class="schedule-bg" id="schedule">
   <section>
-    <h2 class="section-title"><span>⏰ タイムスケジュール</span></h2>
-    <table class="schedule-table">
+    <h2 class="section-title" data-reveal><span>⏰ タイムスケジュール</span></h2>
+    <table class="schedule-table" data-reveal>
       <thead>
         <tr>
           <th>時間</th>
@@ -125,10 +140,10 @@
 </div>
 
 <!-- ACCESS -->
-<div class="access-bg">
+<div class="access-bg" id="access">
   <section>
-    <h2 class="section-title"><span>📍 アクセス</span></h2>
-    <div class="access-box">
+    <h2 class="section-title" data-reveal><span>📍 アクセス</span></h2>
+    <div class="access-box" data-reveal>
       <strong>会場：</strong>川和富士公園<br>
       <strong>住所：</strong>神奈川県横浜市（※詳細は追って掲載予定）<br>
       <strong>開催日：</strong>2027年3月28日（日）10:00〜15:00<br>
@@ -138,9 +153,9 @@
 </div>
 
 <!-- RECRUIT -->
-<div class="recruit-bg">
+<div class="recruit-bg" id="recruit">
   <section>
-    <h2 class="section-title"><span>🤝 出店・協賛のご案内</span></h2>
+    <h2 class="section-title" data-reveal><span>🤝 出店・協賛のご案内</span></h2>
     <div class="recruit-grid">
 
       <div class="recruit-card">
@@ -168,10 +183,10 @@
 </div>
 
 <!-- CONTACT -->
-<div class="contact-bg">
+<div class="contact-bg" id="contact">
   <section>
-    <h2 class="section-title"><span>📬 お問い合わせ</span></h2>
-    <div class="contact-box">
+    <h2 class="section-title" data-reveal><span>📬 お問い合わせ</span></h2>
+    <div class="contact-box" data-reveal>
       <p>
         ふれあいの丘連合自治会　連合祭実行委員会<br>
         📧 メールアドレス：未定<br>
@@ -187,5 +202,124 @@
   <p>© 2027 ふれあいの丘連合自治会　連合祭実行委員会</p>
 </footer>
 
+<script>
+(function () {
+  // プログラム・協賛カードに data-reveal + 時差 transition-delay を付与
+  document.querySelectorAll('.program-grid, .recruit-grid').forEach(grid => {
+    [...grid.children].forEach((card, idx) => {
+      card.setAttribute('data-reveal', '');
+      card.style.transitionDelay = (idx * 0.09) + 's';
+    });
+  });
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-visible');
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+
+  // ナビバー：スクロールで影を追加
+  const nav = document.querySelector('.site-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+})();
+</script>
+
+<script>
+(function () {
+  const hero = document.querySelector('.hero');
+  const CYCLE = 11000; // ms per bloom cycle
+
+  // 左クラスター (x: 2-20%) + 右クラスター (x: 80-98%) の2塊
+  const POSITIONS = [
+    // ── 左クラスター ──
+    { x: '4%',  y: '10%', sz: 0.58, d: 0.1 },
+    { x: '11%', y: '6%',  sz: 0.52, d: 0.3 },
+    { x: '18%', y: '13%', sz: 0.63, d: 0.0 },
+    { x: '6%',  y: '26%', sz: 0.82, d: 0.4 },
+    { x: '14%', y: '20%', sz: 0.90, d: 0.2 },
+    { x: '2%',  y: '40%', sz: 0.70, d: 0.6 },
+    { x: '10%', y: '34%', sz: 1.00, d: 0.3 },
+    { x: '17%', y: '36%', sz: 0.92, d: 0.5 },
+    { x: '5%',  y: '51%', sz: 0.84, d: 0.7 },
+    { x: '13%', y: '48%', sz: 0.96, d: 0.4 },
+    { x: '19%', y: '53%', sz: 0.76, d: 0.8 },
+    { x: '7%',  y: '63%', sz: 0.68, d: 0.9 },
+    { x: '14%', y: '66%', sz: 0.86, d: 0.6 },
+    { x: '3%',  y: '74%', sz: 0.62, d: 1.0 },
+    { x: '11%', y: '78%', sz: 0.74, d: 0.8 },
+    { x: '19%', y: '73%', sz: 0.66, d: 1.1 },
+    // ── 右クラスター ──
+    { x: '96%', y: '10%', sz: 0.58, d: 0.2 },
+    { x: '89%', y: '6%',  sz: 0.52, d: 0.0 },
+    { x: '82%', y: '13%', sz: 0.63, d: 0.4 },
+    { x: '94%', y: '26%', sz: 0.82, d: 0.1 },
+    { x: '86%', y: '20%', sz: 0.90, d: 0.5 },
+    { x: '98%', y: '40%', sz: 0.70, d: 0.3 },
+    { x: '90%', y: '34%', sz: 1.00, d: 0.6 },
+    { x: '83%', y: '36%', sz: 0.92, d: 0.2 },
+    { x: '95%', y: '51%', sz: 0.84, d: 0.8 },
+    { x: '87%', y: '48%', sz: 0.96, d: 0.4 },
+    { x: '81%', y: '53%', sz: 0.76, d: 0.7 },
+    { x: '93%', y: '63%', sz: 0.68, d: 0.5 },
+    { x: '86%', y: '66%', sz: 0.86, d: 0.9 },
+    { x: '97%', y: '74%', sz: 0.62, d: 0.6 },
+    { x: '89%', y: '78%', sz: 0.74, d: 1.0 },
+    { x: '81%', y: '73%', sz: 0.66, d: 0.8 },
+  ];
+
+  function makeBlossom({ x, y, sz, d }) {
+    const wrap = document.createElement('div');
+    wrap.className = 'blossom';
+    wrap.style.setProperty('--x', x);
+    wrap.style.setProperty('--y', y);
+    wrap.style.setProperty('--sz', sz);
+
+    // bud
+    const bud = document.createElement('div');
+    bud.className = 'bud';
+    bud.style.animationDelay = d + 's';
+    wrap.appendChild(bud);
+
+    // 5 petals (arms rotated 72° apart)
+    for (let i = 0; i < 5; i++) {
+      const arm = document.createElement('div');
+      arm.className = 'petal-arm';
+      arm.style.transform = `rotate(${i * 72}deg)`;
+      const shape = document.createElement('div');
+      shape.className = 'petal-shape';
+      shape.style.animationDelay = (d + 0.22 + i * 0.08) + 's';
+      arm.appendChild(shape);
+      wrap.appendChild(arm);
+    }
+
+    // stamen (centre)
+    const stamen = document.createElement('div');
+    stamen.className = 'stamen';
+    stamen.style.animationDelay = (d + 0.88) + 's';
+    wrap.appendChild(stamen);
+
+    return wrap;
+  }
+
+  function runCycle() {
+    const layer = document.createElement('div');
+    layer.className = 'sakura-layer';
+    POSITIONS.forEach(p => layer.appendChild(makeBlossom(p)));
+    hero.prepend(layer);
+
+    // fade out whole layer before next cycle
+    setTimeout(() => { layer.style.transition = 'opacity 0.8s'; layer.style.opacity = '0'; }, CYCLE - 900);
+    setTimeout(() => { layer.remove(); runCycle(); }, CYCLE);
+  }
+
+  runCycle();
+})();
+</script>
 </body>
 </html>
