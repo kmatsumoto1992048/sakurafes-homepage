@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>さくら祭り2027 チラシ</title>
+  <style>
+    /* ===== 印刷設定 ===== */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: #fff;
+      color: #222;
+    }
+
+    /* ===== チラシ本体 ===== */
+    .flyer {
+      width: 210mm;
+      min-height: 257mm; /* 抽選券40mm分を除いた高さ */
+      padding: 10mm 12mm 8mm;
+      display: flex;
+      flex-direction: column;
+      gap: 5mm;
+      background: #fff;
+    }
+
+    /* ===== ヘッダー ===== */
+    .header {
+      text-align: center;
+      background: linear-gradient(135deg, #fce4ec, #fff3e0);
+      border-radius: 6mm;
+      padding: 6mm 8mm 5mm;
+      border: 2px solid #f06292;
+      position: relative;
+    }
+
+    .header-deco {
+      font-size: 13pt;
+      letter-spacing: 3px;
+      color: #f48fb1;
+      margin-bottom: 2mm;
+    }
+
+    .header-sub {
+      font-size: 9pt;
+      color: #e91e63;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 2mm;
+    }
+
+    .header h1 {
+      font-size: 42pt;
+      font-weight: 900;
+      color: #e91e63;
+      text-shadow: 2px 2px 0 #fff, 3px 3px 0 #f8bbd0;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+    }
+
+    .header-catch {
+      font-size: 11pt;
+      color: #555;
+      margin-top: 2mm;
+    }
+
+    /* ===== 開催情報 ===== */
+    .info-bar {
+      display: flex;
+      gap: 3mm;
+      justify-content: center;
+    }
+
+    .info-item {
+      flex: 1;
+      text-align: center;
+      background: #e91e63;
+      color: #fff;
+      border-radius: 4mm;
+      padding: 3mm 2mm;
+    }
+
+    .info-item .info-label {
+      font-size: 7pt;
+      opacity: 0.85;
+      margin-bottom: 1mm;
+    }
+
+    .info-item .info-value {
+      font-size: 11pt;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    /* ===== イベント内容 ===== */
+    .events-title {
+      text-align: center;
+      font-size: 13pt;
+      font-weight: 900;
+      color: #e65100;
+      border-bottom: 2px solid #ff8a65;
+      padding-bottom: 1.5mm;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3mm;
+    }
+
+    .event-card {
+      border: 1.5px solid #ffe0b2;
+      border-radius: 3mm;
+      padding: 3mm;
+      text-align: center;
+      background: #fff9fb;
+    }
+
+    .event-card .e-icon { font-size: 16pt; line-height: 1; margin-bottom: 1mm; }
+    .event-card .e-name { font-size: 9pt; font-weight: bold; color: #333; line-height: 1.3; }
+    .event-card .e-note { font-size: 7pt; color: #888; margin-top: 0.5mm; line-height: 1.3; }
+
+    /* ===== 大抽選会 ===== */
+    .lottery-highlight {
+      background: linear-gradient(135deg, #fff3e0, #fce4ec);
+      border: 2.5px solid #e91e63;
+      border-radius: 4mm;
+      padding: 3mm 5mm;
+      text-align: center;
+    }
+
+    .lottery-highlight .lh-title {
+      font-size: 15pt;
+      font-weight: 900;
+      color: #e91e63;
+    }
+
+    .lottery-highlight .lh-desc {
+      font-size: 9pt;
+      color: #555;
+      margin-top: 1mm;
+    }
+
+    /* ===== 主催・問い合わせ ===== */
+    .organizer {
+      text-align: center;
+      font-size: 8pt;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* ===== 切り取り線 ===== */
+    .cut-line {
+      width: 210mm;
+      margin-left: -12mm;
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      padding: 0 6mm;
+      margin-top: auto;
+    }
+
+    .cut-line::before,
+    .cut-line::after {
+      content: "";
+      flex: 1;
+      border-top: 1.5px dashed #aaa;
+    }
+
+    .cut-icon {
+      font-size: 11pt;
+      color: #aaa;
+      transform: rotate(90deg);
+      display: inline-block;
+    }
+
+    /* ===== 抽選引換券 ===== */
+    .ticket {
+      width: 210mm;
+      height: 40mm;
+      margin-left: -12mm;
+      padding: 4mm 12mm;
+      display: flex;
+      align-items: center;
+      gap: 5mm;
+      background: linear-gradient(135deg, #fce4ec 0%, #fff3e0 100%);
+    }
+
+    .ticket-left {
+      writing-mode: vertical-rl;
+      font-size: 14pt;
+      font-weight: 900;
+      color: #e91e63;
+      text-orientation: mixed;
+      white-space: nowrap;
+      letter-spacing: 2px;
+      border-right: 1.5px dashed #f48fb1;
+      padding-right: 4mm;
+    }
+
+    .ticket-center {
+      flex: 1;
+    }
+
+    .ticket-title {
+      font-size: 18pt;
+      font-weight: 900;
+      color: #e91e63;
+      line-height: 1;
+    }
+
+    .ticket-title span {
+      font-size: 10pt;
+      font-weight: normal;
+      color: #555;
+      display: block;
+      margin-top: 1mm;
+    }
+
+    .ticket-detail {
+      font-size: 8pt;
+      color: #666;
+      margin-top: 2mm;
+      line-height: 1.7;
+    }
+
+    .ticket-right {
+      text-align: center;
+      border: 1.5px dashed #f06292;
+      border-radius: 3mm;
+      padding: 3mm 4mm;
+      min-width: 28mm;
+    }
+
+    .ticket-right .t-no-label {
+      font-size: 7pt;
+      color: #aaa;
+      margin-bottom: 1mm;
+    }
+
+    .ticket-right .t-no {
+      font-size: 22pt;
+      font-weight: 900;
+      color: #e91e63;
+      letter-spacing: 2px;
+    }
+
+    .ticket-right .t-sakura {
+      font-size: 13pt;
+      margin-top: 1mm;
+    }
+
+    /* ===== 画面表示用余白 ===== */
+    @media screen {
+      body {
+        background: #eee;
+        padding: 20px;
+      }
+      .flyer {
+        box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      }
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="flyer">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div class="header-deco">🌸 🌸 🌸 🌸 🌸</div>
+    <div class="header-sub">ふれあいの丘連合自治会　連合祭実行委員会　主催</div>
+    <h1>🌸 さくら祭り2027</h1>
+    <div class="header-catch">子どもから大人まで、みんなで楽しむ地域の春まつり</div>
+  </div>
+
+  <!-- 開催情報 -->
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-label">📅 開催日</div>
+      <div class="info-value">2027年3月28日（日）</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">🕙 時間</div>
+      <div class="info-value">10:00 〜 15:00</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">📍 会場</div>
+      <div class="info-value">川和富士公園</div>
+    </div>
+  </div>
+
+  <!-- イベント内容 -->
+  <div class="events-title">🎪 イベント内容</div>
+  <div class="events-grid">
+
+    <div class="event-card">
+      <div class="e-icon">🍖</div>
+      <div class="e-name">お花見BBQエリア</div>
+      <div class="e-note">食材持参で自由参加！</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🍡</div>
+      <div class="e-name">模擬店エリア</div>
+      <div class="e-note">焼きそば・綿菓子・お餅など</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🎺</div>
+      <div class="e-name">吹奏楽演奏</div>
+      <div class="e-note">生演奏で会場を盛り上げます</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🪵</div>
+      <div class="e-name">モルック大会</div>
+      <div class="e-note">初心者・家族連れ大歓迎！</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🎯</div>
+      <div class="e-name">チェッコリ玉入れ</div>
+      <div class="e-note">景品多数ご用意！</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🪀</div>
+      <div class="e-name">けん玉検定</div>
+      <div class="e-note">級ごとに認定します</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🏪</div>
+      <div class="e-name">フリーマーケット</div>
+      <div class="e-note">どなたでも参加できます</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🗺️</div>
+      <div class="e-name">オリエンテーリング</div>
+      <div class="e-note">公園内探検ゲーム・景品あり</div>
+    </div>
+
+    <div class="event-card">
+      <div class="e-icon">🎟️</div>
+      <div class="e-name">プチ抽選会</div>
+      <div class="e-note">1時間おきに開催！</div>
+    </div>
+
+  </div>
+
+  <!-- 大抽選会ハイライト -->
+  <div class="lottery-highlight">
+    <div class="lh-title">🎉 大抽選会 開催！</div>
+    <div class="lh-desc">イベント終盤に大抽選会を実施。豪華景品が当たるチャンス！</div>
+  </div>
+
+  <!-- 主催・問い合わせ -->
+  <div class="organizer">
+    主催：ふれあいの丘連合自治会　連合祭実行委員会　／　お問い合わせ先：未定
+  </div>
+
+</div><!-- /.flyer -->
+
+<!-- 切り取り線 -->
+<div class="cut-line">
+  <span class="cut-icon">✂</span>
+</div>
+
+<!-- 抽選引換券 -->
+<div class="ticket">
+  <div class="ticket-left">抽選引換券</div>
+  <div class="ticket-center">
+    <div class="ticket-title">
+      🌸 さくら祭り2027
+      <span>大抽選会 引換券</span>
+    </div>
+    <div class="ticket-detail">
+      📅 2027年3月28日（日）　📍 川和富士公園<br>
+      ※ このチラシを当日会場の受付にお持ちください。<br>
+      ※ お一人様1枚限り有効です。
+    </div>
+  </div>
+  <div class="ticket-right">
+    <div class="t-no-label">番号</div>
+    <div class="t-no">____</div>
+    <div class="t-sakura">🌸🌸🌸</div>
+  </div>
+</div>
+
+</body>
+</html>
